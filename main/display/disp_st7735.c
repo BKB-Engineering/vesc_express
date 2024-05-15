@@ -48,9 +48,9 @@ static void command_start(uint8_t cmd) {
 }
 
 static uint16_t to_disp_color(uint32_t rgb) {
-	uint8_t b = (uint8_t)rgb;
+	uint8_t r = (uint8_t)rgb;
 	uint8_t g = (uint8_t)(rgb >> 8);
-	uint8_t r = (uint8_t)(rgb >> 16);
+	uint8_t b = (uint8_t)(rgb >> 16);
 	r >>= 3;
 	g >>= 2;
 	b >>= 3;
