@@ -36,7 +36,14 @@ void hw_init(void) {
 	gpconf.intr_type =  GPIO_INTR_DISABLE;
 	gpio_config(&gpconf);
 
-	gpconf.pin_bit_mask = BIT(PIN_BUTT_ON);
+	gpconf.pin_bit_mask = BIT(PIN_BUTTON_ON);
+	gpconf.mode = GPIO_MODE_INPUT;
+	gpconf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+	gpconf.pull_up_en = GPIO_PULLUP_DISABLE;
+	gpconf.intr_type =  GPIO_INTR_DISABLE;
+	gpio_config(&gpconf);
+
+	gpconf.pin_bit_mask = BIT(PIN_SCL);
 	gpconf.mode = GPIO_MODE_INPUT;
 	gpconf.pull_down_en = GPIO_PULLDOWN_DISABLE;
 	gpconf.pull_up_en = GPIO_PULLUP_DISABLE;
@@ -65,21 +72,28 @@ void voyager_off_sequence(void){
 
 void voyager_on_sequence(void){
 uint16_t on_count = 0;
-	for(;;){
 
-		if(gpio_get_level(PIN_BUTT_ON)){
-			on_count++;
-		}else{
-			//when charger monitor is ready, check if charging and show
-			//charge screen instead of turn off
-			voyager_off_sequence();
-		}
-		for (volatile uint16_t i = 0; i < 4000 ; i++) {
-			__NOP();
-		}
-		if(on_count > 2000){
-			break;
+	if(!isChargin()){ // is charger connected?
+		for(;;){
+			if(isOnButtonPressed()){
+				on_count++;
+			}else{
+				voyager_off_sequence();
+			}
+			for (volatile uint16_t i = 0; i < 4000 ; i++) {
+				__NOP();
+			}
+			if(on_count > 2000){
+				break;
+			}
 		}
 	}
 }
 
+bool isOnButtonPressed(void){
+	return gpio_get_level(PIN_BUTTON_ON);
+}
+
+bool isChargin(void){
+	return (!gpio_get_level(PIN_SCL));
+}
