@@ -31,6 +31,7 @@
 #define HW_ADC_CH0					ADC1_CHANNEL_0
 #define HW_ADC_CH1					ADC1_CHANNEL_1
 #define HW_ADC_CH2					ADC1_CHANNEL_2
+#define HW_ADC_CH3					ADC1_CHANNEL_3
 
 // I2C
 #define PIN_SDA						3
@@ -39,11 +40,13 @@
 //GPIO
 #define PIN_PWR_LATCH               20
 #define PIN_BUZZER                  21
-#define PIN_BUTT_ON                 10
+#define PIN_BUTTON_ON               10
 
 
 // Functions
 void hw_init(void);
 void voyager_on_sequence(void);
 void voyager_off_sequence(void);
+bool isOnButtonPressed(void);
+bool isChargin(void);
 #endif /* MAIN_HWCONF_DEVKIT_C3_H_ */
