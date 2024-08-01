@@ -49,4 +49,6 @@ void voyager_on_sequence(void);
 void voyager_off_sequence(void);
 bool isOnButtonPressed(void);
 bool isChargin(void);
+void set_cpu_frequency(int freq);
+
 #endif /* MAIN_HWCONF_DEVKIT_C3_H_ */

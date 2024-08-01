@@ -5444,6 +5444,7 @@ void lispif_load_vesc_extensions(void) {
 	lbm_add_extension("gpio-configure", ext_gpio_configure);
 	lbm_add_extension("gpio-write", ext_gpio_write);
 	lbm_add_extension("gpio-read", ext_gpio_read);
+
 	lbm_add_extension("gpio-hold", ext_gpio_hold);
 	lbm_add_extension("gpio-hold-deepsleep", ext_gpio_hold_deepsleep);
 
