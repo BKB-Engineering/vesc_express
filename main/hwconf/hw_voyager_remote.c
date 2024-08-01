@@ -94,13 +94,11 @@ uint16_t on_count = 0;
 
 void set_cpu_frequency(int freq) {
 
-	rtc_cpu_freq_config_t old_config, new_config;
-	rtc_clk_cpu_freq_get_config(&old_config);
+	rtc_cpu_freq_config_t new_config;
 
-	const uint32_t old_freq_mhz = old_config.freq_mhz; // this is helpful to keep the old frequency hold
-	const uint32_t new_freq_mhz = freq; //80;
+	const uint32_t freq_mhz = freq; //80;
 
-	bool res = rtc_clk_cpu_freq_mhz_to_config(new_freq_mhz, &new_config);
+	bool res = rtc_clk_cpu_freq_mhz_to_config(freq_mhz, &new_config);
 	assert(res);
 
 	if (res) {
